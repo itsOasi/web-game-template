@@ -1,7 +1,7 @@
 let player = null
 
-function player_update(deltaTime){
-	onkeydown = (event)=> {
+function player_update(deltaTime){ // update function for player
+	onkeydown = (event)=> { // read input
 		if (event.isComposing || event.which === 38) {
 			player.move_up()
 		  }
@@ -23,7 +23,7 @@ function player_update(deltaTime){
 	}
 }
 
-function add_enemy(deltaTime){
+function add_enemy(deltaTime){ // adds an enemy
 	let enemy = sprites.add(`${Math.random()*999999+111111}`, Math.random()*canvas.width, 0, 10, 10, "frowny")
 	enemy.update = function(){
 		this.y += 10
@@ -35,9 +35,9 @@ function add_enemy(deltaTime){
 document.body.onload = function(){
 	boot();
 	player = sprites.get("smiley");
-	player.update =(deltaTime)=>{player_update(deltaTime)}
-	player.spd = 9
-	player.move_left = function(){
+	player.update =(deltaTime)=>{player_update(deltaTime)} // add update function to player object
+	player.spd = 9 // player movement speed
+	player.move_left = function(){ // movement functions for player sprite
 		console.log("left");
 		this.x -= this.spd
 	}
@@ -53,16 +53,5 @@ document.body.onload = function(){
 		console.log("down");
 		this.y += this.spd
 	}
-	setInterval(add_enemy, Math.random()*5000)	
-}
-
-document.onkeydown = (event)=> {
-	if (event.isComposing || event.which === 38) {
-		console.log("up");
-		sprites.freeze()
-	  }
-	if (event.isComposing || event.which === 40) {
-		console.log("down");
-		global_funcs.freeze()
-	  }
+	setInterval(add_enemy, Math.random()*5000)	// randomly spawn enemies
 }

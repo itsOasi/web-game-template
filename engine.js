@@ -7,7 +7,7 @@ var engine = Matter.Engine.create();
 var world = Matter.Composite;
 var runner = Matter.Runner.create();
 
-class PhysicsSprite {
+class PhysicsSprite { // sprite with physics body
 	constructor(x, y, width, height, spriteID, update=null, render=null) {
 		this.loaded = false
 		// Set up Matter.js
@@ -36,7 +36,7 @@ class PhysicsSprite {
 	}
 }
 
-let sprites = {
+let sprites = { // object to manage sprites
 	sprites: {},
 	add: function(name, x, y, width, height, path, update, render){
 		var sprite = new PhysicsSprite(x, y, width, height, path, update, render);
@@ -64,23 +64,18 @@ let sprites = {
 	}
 }
 
-class Sounds{
-	constructor(){
-		// Load sound effects and set preload attribute
-		this.sounds = {}
-	}
-
-	add(name, path, preload="auto"){
+let sounds = { 
+	sounds: {},
+	add: function(name, path, preload="auto"){
 		this.sounds[name] = new Audio();
 		this.sounds[name].src = path;
 		this.sounds[name].preload = preload;
-	}
+	},
 	
-	remove(name){
+	remove: function(name){
 		delete this.sounds[name];
-	}
-
-	play(name){
+	},
+	play: function(name){
 		// Play sound effects
 		this.sounds[name].play();
 	}
